@@ -54,4 +54,5 @@ const createRandomPerson = function(){
 };
 
 const createPost = Array.from({length: 25}, createRandomPerson);
+
 console.log(createPost);
