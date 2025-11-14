@@ -19,4 +19,6 @@ const createComment = function(){
   };
 };
 
-export{createComment}
+const arrayOfComments = Array.from({length: 25}, createComment);
+
+export{createComment, arrayOfComments}
