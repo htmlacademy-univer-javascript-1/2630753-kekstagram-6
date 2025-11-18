@@ -1,3 +1,6 @@
 import {createPost} from "./posts.js";
+import { showPost } from "./showUsersPosts.js";
+import "./fullImageModalWindow.js";
 
-console.log(createPost)
+showPost();
+console.log(createPost);
