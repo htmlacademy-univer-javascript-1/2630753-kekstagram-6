@@ -4,13 +4,14 @@ const body = document.querySelector('body');
 const textHashtags = document.querySelector('.text__hashtags');
 const textDescription = document.querySelector('.text__description');
 const imgUploadForm = document.querySelector('.img-upload__form');
+const imgUploadCancel = document.querySelector('.img-upload__cancel');
 
 const patternHashStroke = /^#[a-zа-яё0-9]{1,19}$/i;
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextTag: 'span',
+  errorTextTag: 'div',
   errorTextClass: 'img-upload__form__error-text'
 });
 
@@ -22,7 +23,7 @@ function validateTagsStructure (value) {
     tagsValid = tagsValid && patternHashStroke.test(tags[i]);
   };
   return tagsValid;
-}
+};
 
 function validateTagsAmount (value) {
   const tags = textHashtags.value.split(" ");
@@ -30,7 +31,7 @@ function validateTagsAmount (value) {
     return true;
   };
   return false;
-}
+};
 
 function validateDescriptionLength (value) {
   const tags = textHashtags.value.split(" ");
@@ -38,7 +39,7 @@ function validateDescriptionLength (value) {
     return true;
   };
   return false;
-}
+};
 
 function validateTagsRepeat (value) {
   const tags = textHashtags.value.split(" ");
@@ -50,12 +51,12 @@ function validateTagsRepeat (value) {
     hashArray.push(tags[i]);
   };
   return tagsValid;
-}
+};
 
 pristine.addValidator(
   imgUploadForm.querySelector('.text__hashtags'),
   validateTagsStructure,
-  'Длина должна хэш-тега быть от 1 до 20 символов без специальных символов'
+  'Длина хэш-тега должна быть от 1 до 20 символов без специальных символов'
 );
 
 pristine.addValidator(
@@ -104,9 +105,22 @@ imgUploadInput.addEventListener('change', function(){
   body.classList.add('modal-open');
 });
 
+
+
 document.addEventListener('keydown', (evt) =>{
   if (evt.key == 'Escape' && (textHashtags !== document.activeElement && textDescription !== document.activeElement)){
     evt.preventDefault();
+    uploadOverlay.classList.add('hidden');
+    body.classList.remove('modal-open');
+    imgUploadInput.value = '';
+  }
+  else{
+    body.classList.add('modal-open');
+  };
+});
+
+imgUploadCancel.addEventListener('click', (evt) =>{
+  if (textHashtags !== document.activeElement && textDescription !== document.activeElement){
     uploadOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
     imgUploadInput.value = '';

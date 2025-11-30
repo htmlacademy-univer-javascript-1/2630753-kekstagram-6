@@ -8,6 +8,7 @@ const commentsCount = bigPicture.querySelector('.comments-count');
 const socialCommentsCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 const picturesContainer = document.querySelector('.pictures, container');
+const bigPictureCancel = document.querySelector('.big-picture__cancel');
 
 const body = document.querySelector('body');
 
@@ -71,4 +72,9 @@ document.addEventListener('keydown', function(event){
     bigPicture.classList.add('hidden');
     body.classList.remove('modal-open');
   };
+});
+
+bigPictureCancel.addEventListener('click', function(event){
+  bigPicture.classList.add('hidden');
+  body.classList.remove('modal-open');
 });
