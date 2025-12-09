@@ -11,7 +11,7 @@ const effectsList = document.querySelector('.effects__list').querySelectorAll('.
 
 imgUploadEffectLevel.classList.add('hidden');
 
-noUiSlider.create(slider, {
+const sliderCreate = noUiSlider.create(slider, {
   range: {
     min: 0,
     max: 100
@@ -33,7 +33,8 @@ effectsList.forEach((effect) =>{
         range:{
           min: 0,
           max: 100
-        }
+        },
+        start: 80
       });
 
       imgUploadEffectLevel.classList.remove('hidden');
@@ -48,7 +49,8 @@ effectsList.forEach((effect) =>{
         range:{
           min: 0,
           max: 100
-        }
+        },
+        start: 80
       });
 
       imgUploadEffectLevel.classList.remove('hidden');
@@ -63,7 +65,8 @@ effectsList.forEach((effect) =>{
         range:{
           min: 0,
           max: 100
-        }
+        },
+        start: 80
       });
 
       imgUploadEffectLevel.classList.remove('hidden');
@@ -78,7 +81,8 @@ effectsList.forEach((effect) =>{
         range:{
           min: 0,
           max: 300
-        }
+        },
+        start: 80
       });
 
       imgUploadEffectLevel.classList.remove('hidden');
@@ -93,7 +97,8 @@ effectsList.forEach((effect) =>{
         range:{
           min: 0,
           max: 300
-        }
+        },
+        start: 80
       });
 
       imgUploadEffectLevel.classList.remove('hidden');
@@ -108,13 +113,14 @@ effectsList.forEach((effect) =>{
         range:{
           min: 0,
           max: 100
-        }
+        },
+        start: 80
       });
 
       imgUploadEffectLevel.classList.add('hidden');
 
       slider.noUiSlider.on('update', () => {
-        img.style.filter = `none`
+        img.style.filter = 'none'
       });
     }; 
   });
