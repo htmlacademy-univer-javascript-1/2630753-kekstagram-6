@@ -1,14 +1,14 @@
-import { createPost } from "./posts.js";
+// import { createPost } from "./posts.js";
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 const picturesContainer = document.querySelector('.pictures, container');
 const listOfPosts = document.createDocumentFragment();
 
-const post = createPost;
+// const post = createPost;
 let i = 0;
 
-const showPost = function(){
+const showPost = function(post){
   post.forEach(() => {
     const userPicture = pictureTemplate.cloneNode(true);
     const pictureImg = userPicture.querySelector('.picture__img');
