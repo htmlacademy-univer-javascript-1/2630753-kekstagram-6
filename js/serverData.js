@@ -20,23 +20,24 @@ const postData = function(form){
     fetch("https://29.javascript.htmlacademy.pro/kekstagram",{
       method: "POST",
       body: new FormData(form)
-})
+    })
     .then((responce) => {
         if (responce.ok){
-            console.log(`${responce.status} ${responce.statusText}`)
+            console.log(`${responce.status} ${responce.statusText}`);
         }
         else{
-            throw new Error(`${responce.status} ${responce.statusText}`)
-        } 
+            throw new Error(`${responce.status} ${responce.statusText}`);
+        }; 
 
         const successMessage = successTemplate.cloneNode(true);
-        const successMessageButton = successMessage.querySelector('.success__button')
+        const successMessageButton = successMessage.querySelector('.success__button');
 
         successMessageButton.addEventListener('click', () =>{
             body.removeChild(successMessage);
             uploadOverlay.classList.remove('hidden');
             body.classList.add('modal-open');
         });
+
         uploadOverlay.classList.add('hidden');
         body.classList.remove('modal-open');
         imgUploadInput.value = '';
@@ -56,13 +57,13 @@ const postData = function(form){
     })
     .catch((err) =>{
         const errorMessage = errorTemplate.cloneNode(true);
-        const errorMessageButton = errorMessage.querySelector('.error__button')
+        const errorMessageButton = errorMessage.querySelector('.error__button');
 
         function closeMessage(){
             errorMessage.classList.add('hidden');
             uploadOverlay.classList.remove('hidden');
             body.classList.add('modal-open');
-        }
+        };
 
         function closeMessageOnEsc(evt){
             if(evt.key == 'Escape' && !errorMessage.classList.contains("hidden")){
@@ -75,8 +76,8 @@ const postData = function(form){
             }
             else{
                 closeModalOnEsc();
-            }
-        }
+            };
+        };
 
         errorMessageButton.addEventListener('click', closeMessage);
         document.addEventListener('keydown', closeMessageOnEsc);
@@ -84,8 +85,8 @@ const postData = function(form){
         uploadOverlay.classList.add('hidden');
         body.classList.remove('modal-open');
         imgUploadInput.value = '';
-        body.appendChild(errorMessage)
-    })
-}
+        body.appendChild(errorMessage);
+    });
+};
 
 export { postData }

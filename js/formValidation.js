@@ -80,29 +80,6 @@ imgUploadForm.addEventListener('submit', (evt) => {
   if (pristine.validate()){
     postData(imgUploadForm);
   };
-
-  // const isValid = pristineHashTag.validate();
-  // const tags = textHashtags.value.split(" ");
-  // let tagsValid = true;
-
-  // if (tags.length <= 5){
-  //   let hashArray = []
-  //   for (let i = 0; i < tags.length; i++){
-  //     tagsValid = tagsValid && patternHashStroke.test(tags[i]);
-  //     tagsValid = tagsValid && !hashArray.includes(tags[i])
-  //     hashArray.push(tags[i])
-  //   };
-  // }
-  // else{
-  //   tagsValid = false;
-  // };
-
-
-  // if (isValid && tagsValid) {
-  //   console.log('Можно отправлять');
-  // } else {
-  //   console.log('Форма невалидна');
-  // };
 });
 
 imgUploadInput.addEventListener('change', function(){
@@ -110,7 +87,6 @@ imgUploadInput.addEventListener('change', function(){
   body.classList.add('modal-open');
   imgUploadPreview.style.transform = 'scale(1)';
 });
-
 
 document.addEventListener('keydown', (evt) =>{
   if (evt.key == 'Escape' && (textHashtags !== document.activeElement && textDescription !== document.activeElement)){

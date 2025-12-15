@@ -5,4 +5,8 @@ const getRandomNumber = function(a, b){
   return Math.floor(result);
 };
 
-export{getRandomNumber}
+function getRandomNumberOptimized(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+};
+
+export{ getRandomNumber, getRandomNumberOptimized };
