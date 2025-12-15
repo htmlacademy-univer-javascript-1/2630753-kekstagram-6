@@ -1,4 +1,5 @@
 import { arrayOfComments } from "./postsComments.js";
+import { allPostsComments } from "./showUsersPosts.js";
 
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImgContainer = bigPicture.querySelector('.big-picture__img');
@@ -10,36 +11,39 @@ const commentsLoader = bigPicture.querySelector('.comments-loader');
 const picturesContainer = document.querySelector('.pictures, container');
 const bigPictureCancel = document.querySelector('.big-picture__cancel');
 const socialComments = bigPicture.querySelector('.social__comments');
+const socialCaption = bigPicture.querySelector('.social__caption');
 let commentsCurrency = 5;
 
 const body = document.querySelector('body');
 
 
 picturesContainer.addEventListener('click', function(event){
-  let allComments = arrayOfComments;
+  let allComments = allPostsComments;
   commentsLoader.classList.remove('hidden');
 
   if (event.target.closest('.picture')){
     const pictureElement = event.target.closest('.picture');
+    const postIndex = Array.prototype.indexOf.call(picturesContainer.children, pictureElement) - 2;
     const img = pictureElement.querySelector('.picture__img');
     const comments = pictureElement.querySelector('.picture__comments').textContent;
     const likes = pictureElement.querySelector('.picture__likes').textContent;
+    const postDescription = pictureElement.querySelector('.picture__img').alt;
 
     bigPicture.classList.remove('hidden');
     likesCount.textContent = likes;
     commentsCount.textContent = comments;
+    socialCaption.textContent = postDescription;
     bigPictureImg.src = img.src;
     body.classList.add('modal-open');
-    allComments = arrayOfComments.slice(0, Number(commentsCount.textContent));
+    console.log(allPostsComments[postIndex]);
+    allComments = allPostsComments[postIndex].slice(0, Number(commentsCount.textContent));
 
     if(Number(commentsCount.textContent) >= 5){
       socialCommentsCount.innerHTML = `5 из <span class="comments-count">${commentsCount.textContent}</span> комментариев`
     }
     else{
       socialCommentsCount.innerHTML = `${commentsCount.textContent} из <span class="comments-count">${commentsCount.textContent}</span> комментариев`
-    }
-
-    // console.log(Number(commentsCount.textContent))
+    };
   };
 
   allComments.forEach(comment => {
