@@ -4,6 +4,7 @@ const imgFilters = document.querySelector('.img-filters');
 const defaultFilterButton = imgFilters.querySelector('#filter-default');
 const randomFilterButton = imgFilters.querySelector('#filter-random');
 const discussedFilterButton = imgFilters.querySelector('#filter-discussed');
+const body = document.querySelector('body');
 
 defaultFilterButton.addEventListener('click', () => {
   defaultFilterButton.classList.add('img-filters__button--active');
@@ -17,7 +18,11 @@ defaultFilterButton.addEventListener('click', () => {
     })
     .catch(() => {
       // eslint-disable-next-line no-alert
-      alert('Не удалось загрузить данные с сервера, пожалуйста, проверьте качество соединения и попробуйте ещё раз');
+      const error = document.createElement('div');
+      error.textContent = 'Ошибка загрузки';
+      error.classList.add('data-error');
+      body.prepend(error);
+      setTimeout(() => error.remove(), 3000);
     });
 });
 
@@ -33,7 +38,11 @@ randomFilterButton.addEventListener('click', () => {
     })
     .catch(() => {
       // eslint-disable-next-line no-alert
-      alert('Не удалось загрузить данные с сервера, пожалуйста, проверьте качество соединения и попробуйте ещё раз');
+      const error = document.createElement('div');
+      error.textContent = 'Ошибка загрузки';
+      error.classList.add('data-error');
+      body.prepend(error);
+      setTimeout(() => error.remove(), 3000);
     });
 });
 
@@ -49,7 +58,11 @@ discussedFilterButton.addEventListener('click', () => {
     })
     .catch(() => {
       // eslint-disable-next-line no-alert
-      alert('Не удалось загрузить данные с сервера, пожалуйста, проверьте качество соединения и попробуйте ещё раз');
+      const error = document.createElement('div');
+      error.textContent = 'Ошибка загрузки';
+      error.classList.add('data-error');
+      body.prepend(error);
+      setTimeout(() => error.remove(), 3000);
     });
 });
 
@@ -60,5 +73,9 @@ fetch('https://29.javascript.htmlacademy.pro/kekstagram/data')
   })
   .catch(() => {
     // eslint-disable-next-line no-alert
-    alert('Не удалось загрузить данные с сервера, пожалуйста, проверьте качество соединения и попробуйте ещё раз');
+    const error = document.createElement('div');
+    error.textContent = 'Ошибка загрузки';
+    error.classList.add('data-error');
+    body.prepend(error);
+    setTimeout(() => error.remove(), 3000);
   });
