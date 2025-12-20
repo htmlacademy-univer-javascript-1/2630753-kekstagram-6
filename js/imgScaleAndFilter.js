@@ -17,6 +17,7 @@ noUiSlider.create(slider, {
     max: 100
   },
   start: 100,
+  start: 100,
   step: 10,
   connect: [true, false],
 });
@@ -33,7 +34,10 @@ effectsList.forEach((effect) =>{
         range:{
           min: 0,
           max: 1
+          max: 1
         },
+        start: 1,
+        step: 0.1
         start: 1,
         step: 0.1
       });
@@ -41,6 +45,8 @@ effectsList.forEach((effect) =>{
       imgUploadEffectLevel.classList.remove('hidden');
 
       slider.noUiSlider.on('update', () => {
+        effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
+        img.style.filter = `grayscale(${Math.round(effectLevelValue.value * 10) / 10})`;
         effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
         img.style.filter = `grayscale(${Math.round(effectLevelValue.value * 10) / 10})`;
       });
@@ -51,7 +57,10 @@ effectsList.forEach((effect) =>{
         range:{
           min: 0,
           max: 1
+          max: 1
         },
+        start: 1,
+        step: 0.1
         start: 1,
         step: 0.1
       });
@@ -59,6 +68,8 @@ effectsList.forEach((effect) =>{
       imgUploadEffectLevel.classList.remove('hidden');
 
       slider.noUiSlider.on('update', () => {
+        effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
+        img.style.filter = `sepia(${Math.round(effectLevelValue.value * 10) / 10})`;
         effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
         img.style.filter = `sepia(${Math.round(effectLevelValue.value * 10) / 10})`;
       });
@@ -72,11 +83,15 @@ effectsList.forEach((effect) =>{
         },
         start: 100,
         step: 1
+        start: 100,
+        step: 1
       });
 
       imgUploadEffectLevel.classList.remove('hidden');
 
       slider.noUiSlider.on('update', () => {
+        effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
+        img.style.filter = `invert(${Math.round(effectLevelValue.value * 10) / 10}%)`;
         effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
         img.style.filter = `invert(${Math.round(effectLevelValue.value * 10) / 10}%)`;
       });
@@ -87,7 +102,10 @@ effectsList.forEach((effect) =>{
         range:{
           min: 0,
           max: 3
+          max: 3
         },
+        start: 3,
+        step: 0.1
         start: 3,
         step: 0.1
       });
@@ -95,6 +113,8 @@ effectsList.forEach((effect) =>{
       imgUploadEffectLevel.classList.remove('hidden');
 
       slider.noUiSlider.on('update', () => {
+        effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
+        img.style.filter = `blur(${Math.round(effectLevelValue.value * 10) / 10}px)`;
         effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
         img.style.filter = `blur(${Math.round(effectLevelValue.value * 10) / 10}px)`;
       });
@@ -105,7 +125,11 @@ effectsList.forEach((effect) =>{
         range:{
           min: 1,
           max: 3
+          min: 1,
+          max: 3
         },
+        start: 3,
+        step: 0.1
         start: 3,
         step: 0.1
       });
@@ -115,6 +139,8 @@ effectsList.forEach((effect) =>{
       slider.noUiSlider.on('update', () => {
         effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
         img.style.filter = `brightness(${Math.round(effectLevelValue.value * 10) / 10})`;
+        effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
+        img.style.filter = `brightness(${Math.round(effectLevelValue.value * 10) / 10})`;
       });
     }
 
@@ -122,6 +148,7 @@ effectsList.forEach((effect) =>{
       imgUploadEffectLevel.classList.add('hidden');
 
       slider.noUiSlider.on('update', () => {
+        img.style.filter = 'none';
         img.style.filter = 'none';
       });
     }

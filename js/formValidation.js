@@ -58,6 +58,7 @@ function validateTagsRepeat () {
 
   let tagsValid = true;
   const repeats = [];
+  const repeats = [];
 
   for (let i = 0; i < tags.length; i++){
     tagsValid = tagsValid && !repeats.includes(tags[i]) && !repeats.includes(tags[i].toLowerCase()) && !repeats.includes(tags[i].toUpperCase());
@@ -117,6 +118,11 @@ imgUploadInput.addEventListener('change', () =>{
 });
 
 function closeUploadWindow(){
+  document.addEventListener('keydown', closeUploadWindowOnEsc);
+  imgUploadCancel.addEventListener('click', closeUploadWindow);
+});
+
+function closeUploadWindow(){
   if (textHashtags !== document.activeElement && textDescription !== document.activeElement){
     uploadOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
@@ -127,6 +133,7 @@ function closeUploadWindow(){
     imgUploadEffectLevel.classList.add('hidden');
     textHashtags.value = '';
     textDescription.value = '';
+    scaleControlValue.value = '100%';
     scaleControlValue.value = '100%';
   }
   else{

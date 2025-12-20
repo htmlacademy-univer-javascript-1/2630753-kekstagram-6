@@ -16,9 +16,11 @@ let commentsCurrency = 5;
 const body = document.querySelector('body');
 
 function openFullWindowPost(event){
+function openFullWindowPost(event){
   let allComments = allPostsComments;
 
   if (event.target.closest('.picture')){
+    commentsLoader.classList.remove('hidden');
     commentsLoader.classList.remove('hidden');
     const pictureElement = event.target.closest('.picture');
     const postIndex = Array.prototype.indexOf.call(picturesContainer.children, pictureElement) - 2;
@@ -48,6 +50,13 @@ function openFullWindowPost(event){
       const socialCommentsItemMessage = document.createElement('p');
       const borderForMessages = socialComments.childElementCount;
 
+      socialCommentsItem.classList.add('social__comment');
+      socialCommentsItemImg.classList.add('social__picture');
+      socialCommentsItemImg.src = comment.avatar;
+      socialCommentsItemImg.alt = comment.name;
+      socialCommentsItemMessage.textContent = comment.message;
+      socialCommentsItemImg.width = 35;
+      socialCommentsItemImg.height = 35;
       socialCommentsItem.classList.add('social__comment');
       socialCommentsItemImg.classList.add('social__picture');
       socialCommentsItemImg.src = comment.avatar;
@@ -123,4 +132,5 @@ document.addEventListener('keydown', closeModalOnEsc);
 
 bigPictureCancel.addEventListener('click', closeModal);
 
+export { closeModalOnEsc, openFullWindowPost };
 export { closeModalOnEsc, openFullWindowPost };
