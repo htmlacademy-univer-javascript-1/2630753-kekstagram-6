@@ -82,7 +82,7 @@ imgUploadForm.addEventListener('submit', (evt) => {
   };
 });
 
-imgUploadInput.addEventListener('change', function(){
+imgUploadInput.addEventListener('change', () =>{
   uploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
   imgUploadPreview.style.transform = 'scale(1)';
