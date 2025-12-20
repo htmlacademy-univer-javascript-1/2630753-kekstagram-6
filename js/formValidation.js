@@ -58,7 +58,6 @@ function validateTagsRepeat () {
 
   let tagsValid = true;
   const repeats = [];
-  const repeats = [];
 
   for (let i = 0; i < tags.length; i++){
     tagsValid = tagsValid && !repeats.includes(tags[i]) && !repeats.includes(tags[i].toLowerCase()) && !repeats.includes(tags[i].toUpperCase());
@@ -113,11 +112,6 @@ imgUploadInput.addEventListener('change', () =>{
   uploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
   imgUploadPreview.style.transform = 'scale(1)';
-  document.addEventListener('keydown', closeUploadWindowOnEsc);
-  imgUploadCancel.addEventListener('click', closeUploadWindow);
-});
-
-function closeUploadWindow(){
   document.addEventListener('keydown', closeUploadWindowOnEsc);
   imgUploadCancel.addEventListener('click', closeUploadWindow);
 });

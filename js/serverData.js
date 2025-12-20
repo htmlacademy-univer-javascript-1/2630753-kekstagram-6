@@ -12,10 +12,8 @@ const imgUploadPreview = document.querySelector('.img-upload__preview');
 const img = imgUploadPreview.querySelector('img');
 const effectsList = document.querySelector('.effects__list').querySelectorAll('.effects__item');
 const effectNone = effectsList[0].querySelector('input');
-const effectNone = effectsList[0].querySelector('input');
 const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
 const slider = imgUploadEffectLevel.querySelector('.effect-level__slider');
-const scaleControlValue = document.querySelector('.scale__control--value');
 const scaleControlValue = document.querySelector('.scale__control--value');
 
 

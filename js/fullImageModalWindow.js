@@ -16,7 +16,6 @@ let commentsCurrency = 5;
 const body = document.querySelector('body');
 
 function openFullWindowPost(event){
-function openFullWindowPost(event){
   let allComments = allPostsComments;
 
   if (event.target.closest('.picture')){
@@ -132,5 +131,5 @@ document.addEventListener('keydown', closeModalOnEsc);
 
 bigPictureCancel.addEventListener('click', closeModal);
 
-export { closeModalOnEsc, openFullWindowPost };
+
 export { closeModalOnEsc, openFullWindowPost };
