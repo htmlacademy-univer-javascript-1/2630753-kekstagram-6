@@ -1,5 +1,5 @@
 import "./fullImageModalWindow.js";
-import "./formValidation.js"
-import "./imgScaleAndFilter.js"
-import "./getDataFromServer.js"
-import "./avatarChanging.js"
+import "./formValidation.js";
+import "./imgScaleAndFilter.js";
+import "./getFilteredDataFromServer.js";
+import "./avatarChanging.js";
