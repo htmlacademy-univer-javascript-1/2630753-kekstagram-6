@@ -1,5 +1,5 @@
-import { postData } from "./serverData.js";
-import { openFullWindowPost } from "./fullImageModalWindow.js";
+import { postData } from './serverData.js';
+// import { openFullWindowPost } from "./fullImageModalWindow.js";
 
 const imgUploadInput = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
@@ -9,11 +9,11 @@ const textDescription = document.querySelector('.text__description');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadCancel = document.querySelector('.img-upload__cancel');
 const imgUploadPreview = document.querySelector('.img-upload__preview');
-const effectNone = document.querySelector('.effects__list').querySelector('.effects__item').querySelector('input')
+const effectNone = document.querySelector('.effects__list').querySelector('.effects__item').querySelector('input');
 const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
 const img = imgUploadPreview.querySelector('img');
 const scaleControlValue = document.querySelector('.scale__control--value');
-const imgUploadButton = document.querySelector('.img-upload__submit')
+const imgUploadButton = document.querySelector('.img-upload__submit');
 
 const patternHashStroke = /^#[a-zа-яё0-9]{1,19}$/i;
 
@@ -24,47 +24,48 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextClass: 'img-upload__form__error-text'
 });
 
-function validateTagsStructure (value) {
+function validateTagsStructure () {
   let tagsValid = true;
-  if (textHashtags.value.length != 0){
-    const tags = textHashtags.value.trim().split(/\s+/).filter(tag => tag !== '');
+  if (textHashtags.value.length !== 0){
+    const tags = textHashtags.value.trim().split(/\s+/).filter((tag) => tag !== '');
 
     for (let i = 0; i < tags.length; i++){
       tagsValid = tagsValid && patternHashStroke.test(tags[i]);
-    };
-  };
+    }
+  }
 
   return tagsValid;
-};
+}
 
-function validateDescriptionLength (value) {
+function validateDescriptionLength () {
   if (textDescription.value.length <= 140){
     return true;
-  };
+  }
   return false;
-};
+}
 
 
-function validateTagsAmount (value) {
-  const tags = textHashtags.value.trim().split(/\s+/).filter(tag => tag !== '');
+function validateTagsAmount () {
+  const tags = textHashtags.value.trim().split(/\s+/).filter((tag) => tag !== '');
   if (tags.length <= 5){
     return true;
-  };
+  }
   return false;
-};
+}
 
-function validateTagsRepeat (value) {
-  const tags = textHashtags.value.trim().split(/\s+/).filter(tag => tag !== '');
+function validateTagsRepeat () {
+  const tags = textHashtags.value.trim().split(/\s+/).filter((tag) => tag !== '');
 
   let tagsValid = true;
+  const repeats = [];
   const repeats = [];
 
   for (let i = 0; i < tags.length; i++){
     tagsValid = tagsValid && !repeats.includes(tags[i]) && !repeats.includes(tags[i].toLowerCase()) && !repeats.includes(tags[i].toUpperCase());
     repeats.push(tags[i]);
-  };
+  }
   return tagsValid;
-};
+}
 
 pristine.addValidator(
   imgUploadForm.querySelector('.text__hashtags'),
@@ -91,28 +92,32 @@ pristine.addValidator(
 );
 
 
-
 imgUploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   imgUploadButton.disabled = true;
-  imgUploadButton.textContent = "Публикуем...";
+  imgUploadButton.textContent = 'Публикуем...';
 
   function unlockButton(){
     imgUploadButton.disabled = false;
-    imgUploadButton.textContent = "Опубликовать";
-  };
+    imgUploadButton.textContent = 'Опубликовать';
+  }
 
-  setTimeout(() => unlockButton(), 1000)
-  
+  setTimeout(() => unlockButton(), 1000);
+
   if (pristine.validate()){
     postData(imgUploadForm);
-  };
+  }
 });
 
 imgUploadInput.addEventListener('change', () =>{
   uploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
   imgUploadPreview.style.transform = 'scale(1)';
+  document.addEventListener('keydown', closeUploadWindowOnEsc);
+  imgUploadCancel.addEventListener('click', closeUploadWindow);
+});
+
+function closeUploadWindow(){
   document.addEventListener('keydown', closeUploadWindowOnEsc);
   imgUploadCancel.addEventListener('click', closeUploadWindow);
 });
@@ -129,18 +134,19 @@ function closeUploadWindow(){
     textHashtags.value = '';
     textDescription.value = '';
     scaleControlValue.value = '100%';
+    scaleControlValue.value = '100%';
   }
   else{
     body.classList.add('modal-open');
-  };
-};
+  }
+}
 
 function closeUploadWindowOnEsc(evt){
-  if (evt.key == 'Escape' && (textHashtags !== document.activeElement && textDescription !== document.activeElement) && !uploadOverlay.classList.contains('hidden')){
+  if (evt.key === 'Escape' && (textHashtags !== document.activeElement && textDescription !== document.activeElement) && !uploadOverlay.classList.contains('hidden')){
     closeUploadWindow();
-  };
-};
+  }
+}
 
 imgUploadCancel.addEventListener('click', closeUploadWindow);
 
-export { closeUploadWindow, closeUploadWindowOnEsc }
+export { closeUploadWindow, closeUploadWindowOnEsc };

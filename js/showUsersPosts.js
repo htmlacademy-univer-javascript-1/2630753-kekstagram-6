@@ -1,4 +1,4 @@
-import { getRandomNumberOptimized } from "./randomGenerator.js";
+import { getRandomNumberOptimized } from './randomGenerator.js';
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures, container');
@@ -22,12 +22,12 @@ const showPost = function(post, randomCheck){
   previosPictures.forEach((picture) => {
     picture.remove();
   });
-  
+
   post.forEach(() => {
     if (randomCheck){
       while(repeatingPictures.includes(i)){
         i = getRandomNumberOptimized(0, post.length);
-      };
+      }
       repeatingPictures.push(i);
     }
 
@@ -45,7 +45,7 @@ const showPost = function(post, randomCheck){
 
     if (!randomCheck){
       i += 1;
-    };
+    }
   });
   picturesContainer.appendChild(listOfPosts);
   imgFilters.classList.remove('img-filters--inactive');
@@ -61,7 +61,7 @@ const showPost = function(post, randomCheck){
 //   });
 
 //   imgFilters.classList.remove('img-filters--inactive');
-  
+
 
 //   post.forEach(() => {
 //     let i = getRandomNumberOptimized(0, post.length);

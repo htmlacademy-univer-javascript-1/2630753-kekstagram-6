@@ -1,4 +1,4 @@
-import {getRandomNumber} from "./randomGenerator.js";
+import {getRandomNumber} from './randomGenerator.js';
 
 const comments = ['Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -21,4 +21,4 @@ const createComment = function(){
 
 const arrayOfComments = Array.from({length: 25}, createComment);
 
-export{createComment, arrayOfComments}
+export{createComment, arrayOfComments};
