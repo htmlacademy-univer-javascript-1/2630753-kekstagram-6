@@ -59,4 +59,4 @@ fetch("https://29.javascript.htmlacademy.pro/kekstagram/data")
     })
     .catch((err) => {
         alert("Не удалось загрузить данные с сервера, пожалуйста, проверьте качество соединения и попробуйте ещё раз");
-    })
+});

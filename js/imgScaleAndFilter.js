@@ -16,7 +16,7 @@ const sliderCreate = noUiSlider.create(slider, {
     min: 0,
     max: 100
   },
-  start: 80,
+  start: 100,
   step: 10,
   connect: [true, false],
 });
@@ -32,32 +32,34 @@ effectsList.forEach((effect) =>{
       slider.noUiSlider.updateOptions({
         range:{
           min: 0,
-          max: 100
+          max: 1
         },
-        start: 80
+        start: 1,
+        step: 0.1
       });
 
       imgUploadEffectLevel.classList.remove('hidden');
 
       slider.noUiSlider.on('update', () => {
-        effectLevelValue.value = slider.noUiSlider.get();
-        img.style.filter = `grayscale(${effectLevelValue.value / 100})`;
+        effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
+        img.style.filter = `grayscale(${Math.round(effectLevelValue.value * 10) / 10})`;
       });
     };
     if (effectValue === 'sepia'){
       slider.noUiSlider.updateOptions({
         range:{
           min: 0,
-          max: 100
+          max: 1
         },
-        start: 80
+        start: 1,
+        step: 0.1
       });
 
       imgUploadEffectLevel.classList.remove('hidden');
 
       slider.noUiSlider.on('update', () => {
-        effectLevelValue.value = slider.noUiSlider.get();
-        img.style.filter = `sepia(${effectLevelValue.value / 100})`;
+        effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
+        img.style.filter = `sepia(${Math.round(effectLevelValue.value * 10) / 10})`;
       });
     };
     if (effectValue === 'marvin'){
@@ -66,61 +68,56 @@ effectsList.forEach((effect) =>{
           min: 0,
           max: 100
         },
-        start: 80
+        start: 100,
+        step: 1
       });
 
       imgUploadEffectLevel.classList.remove('hidden');
 
       slider.noUiSlider.on('update', () => {
-        effectLevelValue.value = slider.noUiSlider.get();
-        img.style.filter = `invert(${effectLevelValue.value}%)`;
+        effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
+        img.style.filter = `invert(${Math.round(effectLevelValue.value * 10) / 10}%)`;
       });
     };
     if (effectValue === 'phobos'){
       slider.noUiSlider.updateOptions({
         range:{
           min: 0,
-          max: 300
+          max: 3
         },
-        start: 80
+        start: 3,
+        step: 0.1
       });
 
       imgUploadEffectLevel.classList.remove('hidden');
 
       slider.noUiSlider.on('update', () => {
-        effectLevelValue.value = slider.noUiSlider.get();
-        img.style.filter = `blur(${effectLevelValue.value / 100}px)`;
+        effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
+        img.style.filter = `blur(${Math.round(effectLevelValue.value * 10) / 10}px)`;
       });
     };
     if (effectValue === 'heat'){
       slider.noUiSlider.updateOptions({
         range:{
-          min: 0,
-          max: 300
+          min: 1,
+          max: 3
         },
-        start: 80
+        start: 3,
+        step: 0.1
       });
 
       imgUploadEffectLevel.classList.remove('hidden');
 
       slider.noUiSlider.on('update', () => {
-        effectLevelValue.value = slider.noUiSlider.get();
-        img.style.filter = `brightness(${effectLevelValue.value / 100})`;
+        effectLevelValue.value = Math.round(slider.noUiSlider.get() * 10) / 10;
+        img.style.filter = `brightness(${Math.round(effectLevelValue.value * 10) / 10})`;
       });
     };
     if (effectValue === 'none'){
-      slider.noUiSlider.updateOptions({
-        range:{
-          min: 0,
-          max: 100
-        },
-        start: 80
-      });
-
       imgUploadEffectLevel.classList.add('hidden');
 
       slider.noUiSlider.on('update', () => {
-        img.style.filter = 'none'
+        img.style.filter = 'none';
       });
     }; 
   });
@@ -128,14 +125,14 @@ effectsList.forEach((effect) =>{
 
 scaleControlSmaller.addEventListener('click', () =>{
   if (Number(scaleControlValue.value.replace('%', '') != 25)){
-    scaleControlValue.value = Number(scaleControlValue.value.replace('%', '')) - 25 + '%';
+    scaleControlValue.value = Math.round(Number(scaleControlValue.value.replace('%', '')) - 25) + '%';
     imgUploadPreview.style.transform = `scale(${scaleControlValue.value.replace('%', '') / 100})`;
   };
 });
 
 scaleControlBigger.addEventListener('click', () =>{
   if (Number(scaleControlValue.value.replace('%', '') != 100)){
-    scaleControlValue.value = Number(scaleControlValue.value.replace('%', '')) + 25 + '%';
+    scaleControlValue.value = Math.round(Number(scaleControlValue.value.replace('%', '')) + 25) + '%';
     imgUploadPreview.style.transform = `scale(${scaleControlValue.value.replace('%', '') / 100})`;
   };
 });
