@@ -1,4 +1,4 @@
-import {getRandomNumber} from "./randomGenerator.js";
+import {getRandomNumber} from './randomGenerator.js';
 
 const postIdRepeats = [];
 const checkIdRepeat = function(currentNum){
@@ -9,4 +9,4 @@ const checkIdRepeat = function(currentNum){
   return currentNum;
 };
 
-export{checkIdRepeat}
+export{checkIdRepeat};

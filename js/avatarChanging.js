@@ -4,11 +4,11 @@ const imgPreview = document.querySelector('.img-upload__preview');
 const avatar = imgPreview.querySelector('img');
 
 imgChoose.addEventListener('change', () => {
-    const file = imgChoose.files[0];
-    const fileName = file.name.toLowerCase();
-    const matches = fileTypes.some((it) => fileName.endsWith(it));
+  const file = imgChoose.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = fileTypes.some((it) => fileName.endsWith(it));
 
-    if (matches) {
-        avatar.src = URL.createObjectURL(file);
-    }
-})
+  if (matches) {
+    avatar.src = URL.createObjectURL(file);
+  }
+});
