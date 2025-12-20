@@ -1,6 +1,6 @@
-import {createComment} from "./postsComments.js";
-import {getRandomNumber} from "./randomGenerator.js";
-import {checkIdRepeat} from "./idRepeats.js";
+import {createComment} from './postsComments.js';
+import {getRandomNumber} from './randomGenerator.js';
+import {checkIdRepeat} from './idRepeats.js';
 
 const UrlRepeats = [];
 const checkUrlRepeat = function(currentNum){
@@ -23,4 +23,4 @@ const createRandomPerson = function(){
 
 const createPost = Array.from({length: 25}, createRandomPerson);
 
-export{createPost}
+export{createPost};
