@@ -6,7 +6,7 @@ const getRandomNumber = function(a, b){
 };
 
 function getRandomNumberOptimized(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-};
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 
 export{ getRandomNumber, getRandomNumberOptimized };
