@@ -17,7 +17,6 @@ noUiSlider.create(slider, {
     max: 100
   },
   start: 100,
-  start: 100,
   step: 10,
   connect: [true, false],
 });
@@ -34,10 +33,7 @@ effectsList.forEach((effect) =>{
         range:{
           min: 0,
           max: 1
-          max: 1
         },
-        start: 1,
-        step: 0.1
         start: 1,
         step: 0.1
       });
@@ -57,10 +53,7 @@ effectsList.forEach((effect) =>{
         range:{
           min: 0,
           max: 1
-          max: 1
         },
-        start: 1,
-        step: 0.1
         start: 1,
         step: 0.1
       });
@@ -83,8 +76,6 @@ effectsList.forEach((effect) =>{
         },
         start: 100,
         step: 1
-        start: 100,
-        step: 1
       });
 
       imgUploadEffectLevel.classList.remove('hidden');
@@ -102,10 +93,7 @@ effectsList.forEach((effect) =>{
         range:{
           min: 0,
           max: 3
-          max: 3
         },
-        start: 3,
-        step: 0.1
         start: 3,
         step: 0.1
       });
@@ -125,11 +113,7 @@ effectsList.forEach((effect) =>{
         range:{
           min: 1,
           max: 3
-          min: 1,
-          max: 3
         },
-        start: 3,
-        step: 0.1
         start: 3,
         step: 0.1
       });
