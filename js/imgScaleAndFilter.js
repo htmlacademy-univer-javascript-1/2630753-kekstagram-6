@@ -140,15 +140,17 @@ effectsList.forEach((effect) =>{
 });
 
 scaleControlSmaller.addEventListener('click', () =>{
-  if (Number(scaleControlValue.value.replace('%', '') !== 25)){
+  if (Number(scaleControlValue.value.replace('%', '')) !== 25){
     scaleControlValue.value = `${Math.round(Number(scaleControlValue.value.replace('%', '')) - 25)}%`;
-    imgUploadPreview.style.transform = `scale(${scaleControlValue.value.replace('%', '') / 100})`;
+    // imgUploadPreview.style.transform = `scale(${scaleControlValue.value.replace('%', '') / 100})`;
+    img.style.transform = `scale(${scaleControlValue.value.replace('%', '') / 100})`;
   }
 });
 
 scaleControlBigger.addEventListener('click', () =>{
-  if (Number(scaleControlValue.value.replace('%', '') !== 100)){
+  if (Number(scaleControlValue.value.replace('%', '')) !== 100){
     scaleControlValue.value = `${Math.round(Number(scaleControlValue.value.replace('%', '')) + 25)}%`;
-    imgUploadPreview.style.transform = `scale(${scaleControlValue.value.replace('%', '') / 100})`;
+    // imgUploadPreview.style.transform = `scale(${scaleControlValue.value.replace('%', '') / 100})`;
+    img.style.transform = `scale(${scaleControlValue.value.replace('%', '') / 100})`;
   }
 });
