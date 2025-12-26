@@ -1,4 +1,4 @@
-import { allPostsComments } from './showUsersPosts.js';
+import { allPostsComments } from './show-users-posts.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImgContainer = bigPicture.querySelector('.big-picture__img');
@@ -11,15 +11,54 @@ const picturesContainer = document.querySelector('.pictures, container');
 const bigPictureCancel = document.querySelector('.big-picture__cancel');
 const socialComments = bigPicture.querySelector('.social__comments');
 const socialCaption = bigPicture.querySelector('.social__caption');
-let commentsCurrency = 5;
+const allComments = allPostsComments;
+const amountsOfCommentsToLoad = 5;
+const commentAvatarSize = {width: 35, height: 35};
+let commentsCurrency = amountsOfCommentsToLoad;
 
 const body = document.querySelector('body');
 
-function openFullWindowPost(event){
-  let allComments = allPostsComments;
+function createComments(allCommentsOfPost){
+  allCommentsOfPost.forEach((comment) => {
+    const socialCommentsItem = document.createElement('li');
+    const socialCommentsItemImg = document.createElement('img');
+    const socialCommentsItemMessage = document.createElement('p');
+    const borderForMessages = socialComments.childElementCount;
 
+    socialCommentsItem.classList.add('social__comment');
+    socialCommentsItemImg.classList.add('social__picture');
+    socialCommentsItemImg.src = comment.avatar;
+    socialCommentsItemImg.alt = comment.name;
+    socialCommentsItemMessage.textContent = comment.message;
+    socialCommentsItemImg.width = commentAvatarSize.width;
+    socialCommentsItemImg.height = commentAvatarSize.height;
+
+    if (borderForMessages >= amountsOfCommentsToLoad){
+      socialCommentsItem.classList.add('hidden');
+    }
+
+    socialCommentsItem.appendChild(socialCommentsItemImg);
+    socialCommentsItem.appendChild(socialCommentsItemMessage);
+    socialComments.appendChild(socialCommentsItem);
+  });
+}
+
+function checkCommentAmount(socialCommentsItemsHiddenCount){
+  if (socialCommentsItemsHiddenCount === 0){
+    commentsLoader.classList.add('hidden');
+    commentsCurrency = amountsOfCommentsToLoad;
+  }
+}
+
+function getPostData(likes, comments, postDescription, img){
+  likesCount.textContent = likes;
+  commentsCount.textContent = comments;
+  socialCaption.textContent = postDescription;
+  bigPictureImg.src = img.src;
+}
+
+function openFullWindowPost(event){
   if (event.target.closest('.picture')){
-    commentsLoader.classList.remove('hidden');
     commentsLoader.classList.remove('hidden');
     const pictureElement = event.target.closest('.picture');
     const postIndex = Array.prototype.indexOf.call(picturesContainer.children, pictureElement) - 2;
@@ -27,78 +66,44 @@ function openFullWindowPost(event){
     const comments = pictureElement.querySelector('.picture__comments').textContent;
     const likes = pictureElement.querySelector('.picture__likes').textContent;
     const postDescription = pictureElement.querySelector('.picture__img').alt;
+    const allCommentsOfPost = allComments[postIndex].slice(0, Number(comments));
 
     bigPicture.classList.remove('hidden');
-    likesCount.textContent = likes;
-    commentsCount.textContent = comments;
-    socialCaption.textContent = postDescription;
-    bigPictureImg.src = img.src;
     body.classList.add('modal-open');
-    allComments = allPostsComments[postIndex].slice(0, Number(commentsCount.textContent));
 
-    if(Number(commentsCount.textContent) >= 5){
-      socialCommentsCount.innerHTML = `5 из <span class="comments-count">${commentsCount.textContent}</span> комментариев`;
+    getPostData(likes, comments, postDescription, img);
+
+    if(Number(commentsCount.textContent) >= amountsOfCommentsToLoad){
+      socialCommentsCount.innerHTML = `${amountsOfCommentsToLoad} из <span class="comments-count">${commentsCount.textContent}</span> комментариев`;
     }
     else{
       socialCommentsCount.innerHTML = `${commentsCount.textContent} из <span class="comments-count">${commentsCount.textContent}</span> комментариев`;
     }
 
-    allComments.forEach((comment) => {
-      const socialCommentsItem = document.createElement('li');
-      const socialCommentsItemImg = document.createElement('img');
-      const socialCommentsItemMessage = document.createElement('p');
-      const borderForMessages = socialComments.childElementCount;
-
-      socialCommentsItem.classList.add('social__comment');
-      socialCommentsItemImg.classList.add('social__picture');
-      socialCommentsItemImg.src = comment.avatar;
-      socialCommentsItemImg.alt = comment.name;
-      socialCommentsItemMessage.textContent = comment.message;
-      socialCommentsItemImg.width = 35;
-      socialCommentsItemImg.height = 35;
-      socialCommentsItem.classList.add('social__comment');
-      socialCommentsItemImg.classList.add('social__picture');
-      socialCommentsItemImg.src = comment.avatar;
-      socialCommentsItemImg.alt = comment.name;
-      socialCommentsItemMessage.textContent = comment.message;
-      socialCommentsItemImg.width = 35;
-      socialCommentsItemImg.height = 35;
-
-      if (borderForMessages >= 5){
-        socialCommentsItem.classList.add('hidden');
-      }
-
-      socialCommentsItem.appendChild(socialCommentsItemImg);
-      socialCommentsItem.appendChild(socialCommentsItemMessage);
-      socialComments.appendChild(socialCommentsItem);
-    });
+    createComments(allCommentsOfPost);
   }
 
   const socialCommentsItemsHiddenCount = socialComments.querySelectorAll('.social__comment.hidden').length;
 
-  if (socialCommentsItemsHiddenCount === 0){
-    commentsLoader.classList.add('hidden');
-    commentsCurrency = 5;
-  }
+  checkCommentAmount(socialCommentsItemsHiddenCount);
 }
 
 picturesContainer.addEventListener('click', openFullWindowPost);
 
 commentsLoader.addEventListener('click', () => {
-  // const socialCommentsItems = socialComments.querySelectorAll('.social__comment');
   const socialCommentsItemsHidden = socialComments.querySelectorAll('.social__comment.hidden');
 
   for (let i = 0; i < socialCommentsItemsHidden.length; i++) {
     socialCommentsItemsHidden[i].classList.remove('hidden');
-    if (i === 4){
+    if (i === amountsOfCommentsToLoad - 1){
       break;
     }
   }
 
   const socialCommentsItemsHiddenCount = socialComments.querySelectorAll('.social__comment.hidden').length;
 
-  if(socialCommentsItemsHidden.length >= 5){
-    commentsCurrency += 5;
+  if(socialCommentsItemsHidden.length >= amountsOfCommentsToLoad){
+    commentsCurrency += amountsOfCommentsToLoad;
   }
   else{
     commentsCurrency += socialCommentsItemsHidden.length;
@@ -106,10 +111,7 @@ commentsLoader.addEventListener('click', () => {
 
   socialCommentsCount.innerHTML = `${commentsCurrency} из <span class="comments-count">${commentsCount.textContent}</span> комментариев`;
 
-  if (socialCommentsItemsHiddenCount === 0){
-    commentsLoader.classList.add('hidden');
-    commentsCurrency = 5;
-  }
+  checkCommentAmount(socialCommentsItemsHiddenCount);
 });
 
 function closeModal(){
