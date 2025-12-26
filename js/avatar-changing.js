@@ -1,7 +1,6 @@
 const fileTypes = ['jpg', 'jpeg', 'png'];
 const imgChoose= document.querySelector('.img-upload__input');
-const imgPreview = document.querySelector('.img-upload__preview');
-const avatar = imgPreview.querySelector('img');
+const avatar = document.querySelector('.img-upload__preview img');
 
 imgChoose.addEventListener('change', () => {
   const file = imgChoose.files[0];

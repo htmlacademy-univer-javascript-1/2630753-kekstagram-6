@@ -1,5 +1,4 @@
-import { postData } from './serverData.js';
-// import { openFullWindowPost } from "./fullImageModalWindow.js";
+import { postData } from './server-data.js';
 
 const imgUploadInput = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
@@ -9,11 +8,16 @@ const textDescription = document.querySelector('.text__description');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadCancel = document.querySelector('.img-upload__cancel');
 const imgUploadPreview = document.querySelector('.img-upload__preview');
-const effectNone = document.querySelector('.effects__list').querySelector('.effects__item').querySelector('input');
+const effectNone = document.querySelector('.effects__item input');
 const imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
 const img = imgUploadPreview.querySelector('img');
 const scaleControlValue = document.querySelector('.scale__control--value');
 const imgUploadButton = document.querySelector('.img-upload__submit');
+const scaleStartValue = '100%';
+const imgStartScale = 'scale(1)';
+const imgStartFilter = 'none';
+const descriptionMaxLength = 140;
+const tagsMaxAmount = 5;
 
 const patternHashStroke = /^#[a-zа-яё0-9]{1,19}$/i;
 
@@ -38,16 +42,15 @@ function validateTagsStructure () {
 }
 
 function validateDescriptionLength () {
-  if (textDescription.value.length <= 140){
+  if (textDescription.value.length <= descriptionMaxLength){
     return true;
   }
   return false;
 }
 
-
 function validateTagsAmount () {
   const tags = textHashtags.value.trim().split(/\s+/).filter((tag) => tag !== '');
-  if (tags.length <= 5){
+  if (tags.length <= tagsMaxAmount){
     return true;
   }
   return false;
@@ -90,17 +93,16 @@ pristine.addValidator(
   'Длина комментария должна быть не более 140 символов'
 );
 
+function unlockButton(){
+  imgUploadButton.disabled = false;
+  imgUploadButton.textContent = 'Опубликовать';
+}
+
 
 imgUploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   imgUploadButton.disabled = true;
   imgUploadButton.textContent = 'Публикуем...';
-
-  function unlockButton(){
-    imgUploadButton.disabled = false;
-    imgUploadButton.textContent = 'Опубликовать';
-  }
-
   setTimeout(() => unlockButton(), 1000);
 
   if (pristine.validate()){
@@ -111,7 +113,7 @@ imgUploadForm.addEventListener('submit', (evt) => {
 imgUploadInput.addEventListener('change', () =>{
   uploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  imgUploadPreview.style.transform = 'scale(1)';
+  imgUploadPreview.style.transform = imgStartScale;
   document.addEventListener('keydown', closeUploadWindowOnEsc);
   imgUploadCancel.addEventListener('click', closeUploadWindow);
 });
@@ -121,14 +123,14 @@ function closeUploadWindow(){
     uploadOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
     imgUploadInput.value = '';
-    imgUploadPreview.style.transform = 'scale(1)';
-    img.style.filter = 'none';
+    imgUploadPreview.style.transform = imgStartScale;
+    img.style.filter = imgStartFilter;
     effectNone.checked = true;
     imgUploadEffectLevel.classList.add('hidden');
     textHashtags.value = '';
     textDescription.value = '';
-    scaleControlValue.value = '100%';
-    scaleControlValue.value = '100%';
+    scaleControlValue.value = scaleStartValue;
+    scaleControlValue.value = scaleStartValue;
   }
   else{
     body.classList.add('modal-open');
