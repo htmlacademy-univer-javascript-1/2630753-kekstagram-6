@@ -142,7 +142,6 @@ effectsList.forEach((effect) =>{
 scaleControlSmaller.addEventListener('click', () =>{
   if (Number(scaleControlValue.value.replace('%', '')) !== 25){
     scaleControlValue.value = `${Math.round(Number(scaleControlValue.value.replace('%', '')) - 25)}%`;
-    // imgUploadPreview.style.transform = `scale(${scaleControlValue.value.replace('%', '') / 100})`;
     img.style.transform = `scale(${scaleControlValue.value.replace('%', '') / 100})`;
   }
 });
@@ -150,7 +149,6 @@ scaleControlSmaller.addEventListener('click', () =>{
 scaleControlBigger.addEventListener('click', () =>{
   if (Number(scaleControlValue.value.replace('%', '')) !== 100){
     scaleControlValue.value = `${Math.round(Number(scaleControlValue.value.replace('%', '')) + 25)}%`;
-    // imgUploadPreview.style.transform = `scale(${scaleControlValue.value.replace('%', '') / 100})`;
     img.style.transform = `scale(${scaleControlValue.value.replace('%', '') / 100})`;
   }
 });
